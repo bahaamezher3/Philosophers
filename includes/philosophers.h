@@ -18,8 +18,8 @@ typedef struct s_philo
     long		meals_counter;
 	bool		full;
 	long		last_meal_time;
-	t_fork		*left_fork;
-	t_fork		*right_fork;
+	t_fork		*first_fork;
+	t_fork		*second_fork;
 	pthread_t	thread_id;
 	t_table		*table;
 }	t_philo;
@@ -62,5 +62,5 @@ void	*safe_malloc(size_t bytes);
 void	safe_thread_handle(pthread_t *thread, void *(*foo)(void *),
 		void *data, t_opcode opcode);
 void	safe_mutex_handle(t_mtx	*mutex, t_opcode opcode);
-
+void	data_init(t_table *table);
 #endif
