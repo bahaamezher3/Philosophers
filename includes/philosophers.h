@@ -43,6 +43,7 @@ struct s_table
 	bool	end_simulation;
 	bool	all_threads_ready;
 	t_mtx	table_mutex;
+	t_mtx	write_mutex;
 	t_fork	*forks;
 	t_philo	*philos;
 };
@@ -58,6 +59,23 @@ typedef enum e_opcode
 	DETACH,
 }	t_opcode;
 
+typedef enum e_time_code
+{
+	SECOND,
+	MILLISECOND,
+	MICROSECOND,
+}	t_time_code;
+
+typedef enum e_status
+{
+	EATING,
+	SLEEPING,
+	THINKING,
+	TAKE_FIRST_FORK,
+	TAKE_SECOND_FORK,
+	DIED,
+}	t_philo_status;
+
 void 	error_exit(char    *error);
 void 	parse_input(t_table *table, char **argv);
 void	*safe_malloc(size_t bytes);
@@ -65,4 +83,14 @@ void	safe_thread_handle(pthread_t *thread, void *(*foo)(void *),
 		void *data, t_opcode opcode);
 void	safe_mutex_handle(t_mtx	*mutex, t_opcode opcode);
 void	data_init(t_table *table);
+bool	simulation_finished(t_table *table);
+long	set_long(t_mtx *mutex, long *dest, long value);
+long	get_long(t_mtx	*mutex, long *value);
+bool	get_bool(t_mtx *mutex, bool *value);
+bool	set_bool(t_mtx *mutex, bool *dest, bool value);
+void	wait_all_threads(t_table *table);
+long    gettime(t_time_code timecode);
+void    precise_usleep(long usec, t_table *table);
+void	write_status(t_philo_status status, t_philo	*philo);
+
 #endif
