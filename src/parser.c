@@ -1,4 +1,4 @@
-#include "includes/philosophers.h"
+#include "../includes/philosophers.h"
 
 static bool is_space(char c)
 {
@@ -41,7 +41,7 @@ static long    ft_atol(char *str)
     while (is_digit(*str))
         nbr = (nbr * 10) + (*str++ - 48);
     if (nbr > INT_MAX)
-        error("Value is too big!");
+        error_exit("Value is too big!");
     return (nbr);
 }
 

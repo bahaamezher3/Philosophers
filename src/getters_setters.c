@@ -1,4 +1,4 @@
-#include "includes/philosophers.h"
+#include "../includes/philosophers.h"
 
 bool	set_bool(t_mtx *mutex, bool *dest, bool value)
 {

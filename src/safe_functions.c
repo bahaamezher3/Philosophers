@@ -1,4 +1,4 @@
-#include "includes/philosophers.h"
+#include "../includes/philosophers.h"
 
 void	*safe_malloc(size_t bytes)
 {
@@ -8,20 +8,6 @@ void	*safe_malloc(size_t bytes)
 	if (ret == NULL)
 		error_exit("Error with the malloc");
 	return (ret);
-}
-
-void	safe_mutex_handle(t_mtx	*mutex, t_opcode opcode)
-{
-	if (opcode == LOCK)
-		handle_mutex_error(pthread_mutex_lock(mutex), opcode);	
-	else if(opcode == UNLOCK)
-		handle_mutex_error(pthread_mutex_unlock(mutex), opcode);
-	else if (opcode == INIT)
-		handle_mutex_error(pthread_mutex_init(mutex, NULL), opcode);
-	else if (opcode == DESTROY)
-		handle_mutex_error(pthread_mutex_destroy(mutex), opcode);
-	else
-		error_exit("Wrong opcode for mutex handle");
 }
 
 static void handle_mutex_error(int status, t_opcode opcode)
@@ -40,6 +26,20 @@ static void handle_mutex_error(int status, t_opcode opcode)
 		error_exit("The process cannot allocate enough memory to create another mutex");
 	else if (EBUSY == status)
 		error_exit("Mutex is locked");
+}
+
+void	safe_mutex_handle(t_mtx	*mutex, t_opcode opcode)
+{
+	if (opcode == LOCK)
+		handle_mutex_error(pthread_mutex_lock(mutex), opcode);	
+	else if(opcode == UNLOCK)
+		handle_mutex_error(pthread_mutex_unlock(mutex), opcode);
+	else if (opcode == INIT)
+		handle_mutex_error(pthread_mutex_init(mutex, NULL), opcode);
+	else if (opcode == DESTROY)
+		handle_mutex_error(pthread_mutex_destroy(mutex), opcode);
+	else
+		error_exit("Wrong opcode for mutex handle");
 }
 
 static void handle_thread_error(int status, t_opcode opcode)

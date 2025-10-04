@@ -1,4 +1,4 @@
-#include "includes/philosophers.h"
+#include "../includes/philosophers.h"
 
 void	write_status(t_philo_status status, t_philo	*philo)
 {

@@ -1,11 +1,11 @@
-#include "includes/philosophers.h"
+#include "../includes/philosophers.h"
 
 int main(int argc, char **argv)
 {
     t_table table;
     if (argc == 5 || argc == 6)
     {
-        prase_input(&table, argv);
+        parse_input(&table, argv);
         data_init(&table);
         dinner_start(&table);
         clean(&table);
