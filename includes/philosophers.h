@@ -101,5 +101,7 @@ void	write_status(t_philo_status status, t_philo *philo);
 bool	all_threads_running(t_mtx *mutex, long	*threads, long philo_nbr);
 void	increase_long(t_mtx *mutex, long *value);
 void	thinking(t_philo *philo, bool pre_simulation);
+void	de_synchronize_philos(t_philo *philo);
+void	*monitor_dinner(void *data);
 
 #endif
